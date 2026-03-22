@@ -24,10 +24,6 @@ Pensado para **Hyprland** y usuarios de Linux que no quieren cambiar de ventana 
 
 <img src="Assets/2.png" alt="Kara AI Preview" width="600">
 
-## Capturas
-
-<img src="Assets/1.png" alt="Kara AI Captura" width="600">
-
 ## Proveedores de IA
 
 | Proveedor | Modelos destacados | Velocidad | Gratis |
@@ -35,6 +31,10 @@ Pensado para **Hyprland** y usuarios de Linux que no quieren cambiar de ventana 
 | **Groq** | Llama 3.3 70B, Qwen 3, GPT-OSS 120B | Muy rápida | Sí |
 | **Google Gemini** | 2.5 Flash, 2.5 Pro, 2.0 Flash | Rápida | Sí |
 | **OpenRouter** | Gemma 3 27B, GLM 4.5, Trinity Mini | Variable | Sí |
+
+## Capturas
+
+<img src="Assets/1.png" alt="Kara AI Captura" width="600">
 
 ## Características
 
