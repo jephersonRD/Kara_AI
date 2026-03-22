@@ -2,6 +2,8 @@
 
 # Kara AI
 
+<img src="Assets/3.jpg" alt="Kara AI Logo" width="400">
+
 **Tu asistente de IA en el escritorio. Sin navegador. Sin distracciones.**
 
 [![Hyprland](https://img.shields.io/badge/Hyprland-ready-blueviolet?style=flat-square&logo=linux)](https://hyprland.org)
