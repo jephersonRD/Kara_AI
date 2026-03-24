@@ -33,7 +33,7 @@ NC='\033[0m'
 
 # Variables
 INSTALL_DIR="$HOME/.karaIA"
-REPO_URL="https://github.com/jephersonRD/Chat-Hyperland"
+REPO_URL="https://github.com/jephersonRD/Kara_AI"
 
 # Detectar ubicación de config de Hyprland
 if [ -f "$HOME/.local/share/caelestia/hypr/hyprland.conf" ]; then
@@ -140,7 +140,7 @@ show_banner() {
   echo "  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═╝"
   echo ""
   echo -e "${NC}"
-  echo -e "    ${DIM}https://github.com/jephersonRD/Chat-Hyperland${NC}"
+  echo -e "    ${DIM}https://github.com/jephersonRD/Kara_AI${NC}"
   echo ""
 }
 
@@ -578,7 +578,7 @@ select_language() {
   echo "  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═╝"
   echo ""
   echo -e "${NC}"
-  echo -e "    ${DIM}https://github.com/jephersonRD/Chat-Hyperland${NC}"
+  echo -e "    ${DIM}https://github.com/jephersonRD/Kara_AI${NC}"
   echo ""
   echo -e "  ${WHITE}$(t "select_lang")${NC}"
   echo ""

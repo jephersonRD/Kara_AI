@@ -30,14 +30,20 @@ Pensado para **Hyprland** y usuarios de Linux que no quieren cambiar de ventana 
 
 Con un solo comando puedes instalar Kara AI en tu sistema:
 
+**Bash/Zsh:**
 ```bash
-bash <(curl -sSL https://raw.githubusercontent.com/jephersonRD/Chat-Hyperland/main/installer.sh)
+bash <(curl -sSL https://raw.githubusercontent.com/jephersonRD/Kara_AI/main/installer.sh)
+```
+
+**Fish shell:**
+```fish
+curl -sSL https://raw.githubusercontent.com/jephersonRD/Kara_AI/main/installer.sh | bash
 ```
 
 O descarga el script y ejecútalo manualmente:
 
 ```bash
-wget https://raw.githubusercontent.com/jephersonRD/Chat-Hyperland/main/installer.sh
+wget https://raw.githubusercontent.com/jephersonRD/Kara_AI/main/installer.sh
 chmod +x installer.sh
 ./installer.sh
 ```
