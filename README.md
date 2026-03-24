@@ -28,21 +28,15 @@ Pensado para **Hyprland** y usuarios de Linux que no quieren cambiar de ventana 
 
 ## Instalación Rápida (Recomendado)
 
-Con un solo comando puedes instalar Kara AI en tu sistema:
+Con un solo comando puedes instalar Kara AI en tu sistema (**funciona en bash, zsh, fish y cualquier terminal**):
 
-**Bash/Zsh:**
-```bash
-bash <(curl -sSL https://raw.githubusercontent.com/jephersonRD/Kara_AI/main/installer.sh)
-```
-
-**Fish shell:**
-```fish
+```sh
 curl -sSL https://raw.githubusercontent.com/jephersonRD/Kara_AI/main/installer.sh | bash
 ```
 
 O descarga el script y ejecútalo manualmente:
 
-```bash
+```sh
 wget https://raw.githubusercontent.com/jephersonRD/Kara_AI/main/installer.sh
 chmod +x installer.sh
 ./installer.sh
