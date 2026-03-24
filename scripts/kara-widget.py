@@ -16,6 +16,7 @@ SRC_DIR = os.path.join(os.path.dirname(SCRIPT_DIR), 'src')
 CONFIG_PATH = os.path.join(SRC_DIR, 'config.json')
 
 HTTP_PORT = 18234
+SHUTDOWN_FLAG = False
 
 
 def load_config():
@@ -120,6 +121,7 @@ class ConfigHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
 
     def do_POST(self):
+        global SHUTDOWN_FLAG
         if self.path == '/api/config':
             length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(length)
@@ -139,6 +141,14 @@ class ConfigHandler(http.server.BaseHTTPRequestHandler):
                 self._cors_headers()
                 self.end_headers()
                 self.wfile.write(b'{"ok":false}')
+        elif self.path == '/api/close':
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self._cors_headers()
+            self.end_headers()
+            self.wfile.write(b'{"ok":true}')
+            SHUTDOWN_FLAG = True
+            GLib.timeout_add(100, Gtk.main_quit)
         else:
             self.send_response(404)
             self.end_headers()
