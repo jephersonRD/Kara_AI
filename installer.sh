@@ -354,7 +354,7 @@ download_project() {
 
   # Animación de descarga
   echo -ne "${DIM}"
-  for i in {1..50}; do
+  for i in {1..30}; do
     echo -ne "▓"
     sleep 0.1
   done
