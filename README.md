@@ -31,7 +31,7 @@ Pensado para **Hyprland** y usuarios de Linux que no quieren cambiar de ventana 
 Con un solo comando puedes instalar Kara AI en tu sistema:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/jephersonRD/Chat-Hyperland/main/installer.sh | bash
+bash <(curl -sSL https://raw.githubusercontent.com/jephersonRD/Chat-Hyperland/main/installer.sh)
 ```
 
 O descarga el script y ejecútalo manualmente:
@@ -97,6 +97,22 @@ El instalador te permitirá:
 ## Capturas
 
 <img src="Assets/1.png" alt="Kara AI Captura" width="600">
+
+## Características
+
+| Función | Descripción |
+|---------|-------------|
+| ⚡ Acceso rápido | `Super + ñ` abre/cierra el widget |
+| 🎨 Tema dark/light | Alterna con un click, se guarda tu preferencia |
+| 💬 Multi-conversación | Sidebar con historial de chats separados |
+| ✏️ Editar mensajes | Click en tu mensaje para editarlo y reenviar |
+| ⏹️ Detener generación | Botón rojo o `Escape` para cortar la respuesta |
+| 📊 Stats en vivo | Tokens, mensajes y tiempo de conversación |
+| 💯 Límite de mensajes | 100 mensajes por chat |
+| 🖥️ Ejecutar código | Botón para abrir código bash en tu terminal |
+| 📥 Descargar código | Guarda bloques de código como archivo |
+| 🔌 Estado de conexión | Punto verde/rojo según tengas internet |
+| 🔑 Gestión de API | Botón "Api" para configurar las claves |
 
 ## Uso
 

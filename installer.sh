@@ -4,6 +4,14 @@
 #  https://github.com/jephersonRD/Chat-Hyperland
 # ═══════════════════════════════════════════════════════════════════════════════
 
+# Detectar si se ejecuta desde pipe (curl | bash) y re-ejecutar correctamente
+if [ ! -t 0 ]; then
+  TEMP_SCRIPT=$(mktemp)
+  cat > "$TEMP_SCRIPT"
+  chmod +x "$TEMP_SCRIPT"
+  exec bash "$TEMP_SCRIPT" "$@"
+fi
+
 # Re-ejecutar con bash si estamos en fish u otro shell
 if [ -z "$BASH_VERSION" ]; then
   exec bash "$0" "$@"
