@@ -14,9 +14,9 @@ import webbrowser
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SRC_DIR = os.path.join(os.path.dirname(SCRIPT_DIR), 'src')
 CONFIG_PATH = os.path.join(SRC_DIR, 'config.json')
+CLOSE_FLAG_PATH = os.path.join(SCRIPT_DIR, '.close_flag')
 
 HTTP_PORT = 18234
-SHUTDOWN_FLAG = False
 
 
 def load_config():
@@ -121,7 +121,6 @@ class ConfigHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
 
     def do_POST(self):
-        global SHUTDOWN_FLAG
         if self.path == '/api/config':
             length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(length)
@@ -147,8 +146,12 @@ class ConfigHandler(http.server.BaseHTTPRequestHandler):
             self._cors_headers()
             self.end_headers()
             self.wfile.write(b'{"ok":true}')
-            SHUTDOWN_FLAG = True
-            GLib.timeout_add(100, Gtk.main_quit)
+            # Create close flag file
+            try:
+                with open(CLOSE_FLAG_PATH, 'w') as f:
+                    f.write('close')
+            except Exception:
+                pass
         else:
             self.send_response(404)
             self.end_headers()
@@ -159,9 +162,28 @@ def start_http_server():
     server.serve_forever()
 
 
+def check_close_flag():
+    """Check if close flag file exists and close the app if it does"""
+    try:
+        if os.path.exists(CLOSE_FLAG_PATH):
+            os.remove(CLOSE_FLAG_PATH)
+            Gtk.main_quit()
+            return False
+    except Exception:
+        pass
+    return True
+
+
 def main():
     os.environ['GDK_BACKEND'] = 'x11'
     signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+    # Remove close flag if exists
+    try:
+        if os.path.exists(CLOSE_FLAG_PATH):
+            os.remove(CLOSE_FLAG_PATH)
+    except Exception:
+        pass
 
     # Leer config y preparar inyección JS
     config = load_config()
@@ -272,6 +294,9 @@ def main():
     win.show_all()
 
     threading.Thread(target=apply_rules, daemon=True).start()
+
+    # Check for close flag every 500ms
+    GLib.timeout_add(500, check_close_flag)
 
     Gtk.main()
 
