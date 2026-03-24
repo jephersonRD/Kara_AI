@@ -4,7 +4,7 @@
 
 **ChatGPT, Gemini & Groq on your desktop. No browser needed.**
 
-<img src="Assets/3.jpg" alt="Kara AI - AI Desktop Widget for Hyprland" width="200">
+<img src="Assets/3.jpg" alt="Kara AI - AI Desktop Widget for Hyprland" width="200">  
 
 [![GitHub Stars](https://img.shields.io/github/stars/jephersonRD/Kara_AI?style=flat-square&logo=github&color=orange)](https://github.com/jephersonRD/Kara_AI)
 [![GitHub Forks](https://img.shields.io/github/forks/jephersonRD/Kara_AI?style=flat-square&logo=github&color=blue)](https://github.com/jephersonRD/Kara_AI)
