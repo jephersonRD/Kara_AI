@@ -1,13 +1,13 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════════════════════
 #  Kara AI - Instalador para Hyprland
-#  https://github.com/jephersonRD/Chat-Hyperland
+#  https://github.com/jephersonRD/Kara_AI
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # Detectar si se ejecuta desde pipe (curl | bash) y re-ejecutar correctamente
 if [ ! -t 0 ]; then
   TEMP_SCRIPT=$(mktemp)
-  cat > "$TEMP_SCRIPT"
+  curl -sSL "https://raw.githubusercontent.com/jephersonRD/Kara_AI/main/installer.sh" -o "$TEMP_SCRIPT"
   chmod +x "$TEMP_SCRIPT"
   exec bash "$TEMP_SCRIPT" "$@"
 fi
