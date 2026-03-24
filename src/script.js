@@ -551,6 +551,39 @@ function bindEvents() {
   newChatBtn.addEventListener('click', createNewChat);
   themeToggle.addEventListener('click', toggleTheme);
   apiBtn.addEventListener('click', openApiOverlay);
+  
+  // Close buttons
+  const closeBtn = document.getElementById('closeBtn');
+  const apiCloseBtn = document.getElementById('apiCloseBtn');
+  
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.kara) {
+        window.webkit.messageHandlers.kara.postMessage('close');
+      } else {
+        window.close();
+      }
+    });
+  }
+  
+  if (apiCloseBtn) {
+    apiCloseBtn.addEventListener('click', () => {
+      if (hasAnyKey()) {
+        apiOverlay.classList.add('hidden');
+        apiConfigured = true;
+        buildModelDropdown();
+        restoreState();
+        userInput.focus();
+      } else {
+        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.kara) {
+          window.webkit.messageHandlers.kara.postMessage('close');
+        } else {
+          window.close();
+        }
+      }
+    });
+  }
+  
   apiContinueBtn.addEventListener('click', () => {
     if (hasAnyKey()) {
       apiOverlay.classList.add('hidden');

@@ -1796,3 +1796,66 @@ body.widget-mode .code-canvas pre {
 body.widget-mode .model-dropdown {
   max-height: min(360px, calc(100vh - 60px));
 }
+
+/* ── Close Button ── */
+.close-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: rgba(192,41,74,0.15);
+  color: var(--accent);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.close-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.close-btn:hover {
+  background: rgba(192,41,74,0.3);
+  transform: scale(1.1);
+}
+
+/* ── API Close Button ── */
+.api-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: rgba(255,255,255,0.08);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  z-index: 10;
+}
+
+.api-close-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.api-close-btn:hover {
+  background: rgba(192,41,74,0.25);
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+[data-theme="light"] .api-close-btn {
+  background: rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .api-close-btn:hover {
+  background: rgba(192,41,74,0.15);
+}
