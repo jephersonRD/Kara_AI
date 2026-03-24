@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kara AI</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <button class="sidebar-new-btn" id="newChatBtn" title="Nueva conversación">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nueva conversación
+      </button>
+    </div>
+    <div class="sidebar-list" id="chatList"></div>
+  </aside>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-left">
+      <button class="icon-btn sidebar-toggle" id="sidebarToggle" title="Conversaciones">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <div class="avatar-ai">
+        <svg viewBox="0 0 24 24" fill="none" class="ai-icon">
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+          <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="header-info">
+        <span class="assistant-name">Kara AI</span>
+        <span class="status-dot-wrap">
+          <span class="status-dot"></span>
+          <span class="status-text">online</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- Theme toggle -->
+      <button class="icon-btn" id="themeToggle" title="Cambiar tema">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <!-- Model + Provider selector -->
+      <div class="model-selector" id="modelSelector">
+        <button class="model-btn" id="modelBtn" title="Seleccionar modelo y proveedor">
+          <span id="providerBadge" class="provider-badge groq">⚡</span>
+          <span id="modelLabel">Llama 3.3 70B</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <!-- El dropdown se construye dinámicamente en script.js -->
+        <div class="model-dropdown" id="modelDropdown"></div>
+      </div>
+
+      <!-- Clear button -->
+      <button class="icon-btn" id="clearBtn" title="Limpiar conversación">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+        </svg>
+      </button>
+
+      <!-- API button -->
+      <button class="icon-btn api-btn" id="apiBtn" title="Configurar API Keys">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+          <path d="M6 10v6a6 6 0 0 0 12 0v-6"/>
+          <circle cx="12" cy="17" r="1"/>
+        </svg>
+        <span class="api-btn-label">Api</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MESSAGES AREA ===== -->
+  <main class="messages-area" id="messagesArea">
+    <div class="welcome" id="welcomeScreen">
+      <div class="welcome-glow"></div>
+      <div class="welcome-avatar">
+        <svg viewBox="0 0 24 24" fill="none" class="w-icon">
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+          <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2 class="welcome-title">Kara AI</h2>
+      <p class="welcome-sub">Tu asistente inteligente local.<br/>¿En qué puedo ayudarte hoy?</p>
+      <div class="suggestions">
+        <button class="suggestion-chip" data-text="¿Qué puedes hacer?">¿Qué puedes hacer?</button>
+        <button class="suggestion-chip" data-text="Escribe un script en Bash">Script Bash</button>
+        <button class="suggestion-chip" data-text="Explícame Hyprland">Hyprland</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== INPUT AREA ===== -->
+  <footer class="input-area">
+    <div class="input-wrap">
+      <textarea
+        id="userInput"
+        placeholder="Escribe un mensaje... (Enter para enviar, Shift+Enter para salto)"
+        rows="1"
+        autocomplete="off"
+        spellcheck="false"
+      ></textarea>
+      <button class="send-btn" id="sendBtn" title="Enviar (Enter)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+      </button>
+      <button class="stop-btn hidden" id="stopBtn" title="Detener generación">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <rect x="6" y="6" width="12" height="12" rx="2"/>
+        </svg>
+      </button>
+    </div>
+    <div class="stats-bar" id="statsBar">
+      <span class="stat-item" id="statMessages">0 msgs</span>
+      <span class="stat-sep">·</span>
+      <span class="stat-item" id="statTime">0m</span>
+      <span class="stat-sep">·</span>
+      <span class="stat-item rate-indicator" id="rateIndicator" title="Requests/min">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span id="rateText">0/0</span>
+      </span>
+    </div>
+    <div class="input-footer">
+      <span class="model-indicator" id="modelIndicator">llama-3.3-70b-versatile</span>
+      <div class="input-footer-right">
+        <span class="token-count" id="tokenCount">0 tokens</span>
+        <span class="char-count" id="charCount">0</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Ping sound -->
+  <audio id="pingSound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbz6hWKihmn8/Xzq5XKidfl8zVyatZLChjls7Vzq5aLChil8vVyq1aLSljmczTyaxbLilimc3UyKxcLiphmc3TyKxcLipimczTyaxcLilimc3UyK1cLCpimM3Ty61bLClimM3Ty6xbLClim83Uy6xcLSlim83Ty6ydLSlinM3Ty6ydLSlinM3Uy6ydLSlinM3Ty6ydLSlinM3Ty6ydLSlinM3Ty6ydLSmjnc3Uy6ydLSmjnM3Uy6ydLSmjnM3Ty6ydLSmjnM3Uy6ydLSmjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLimjnM3Uy62dLg==" type="audio/wav">
+  </audio>
+
+  <!-- ===== API KEY SETUP OVERLAY ===== -->
+  <div class="api-overlay" id="apiOverlay">
+    <div class="api-modal">
+      <div class="api-modal-header">
+        <div class="api-modal-logo">
+          <svg viewBox="0 0 24 24" fill="none" class="api-logo-icon">
+            <circle cx="12" cy="12" r="3" fill="currentColor"/>
+            <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2>Configurar API Keys</h2>
+        <p class="api-modal-sub">Conecta al menos un proveedor para empezar a usar Kara AI</p>
+      </div>
+
+      <div class="api-providers">
+        <!-- Groq -->
+        <div class="api-provider-card" data-provider="groq">
+          <div class="api-provider-head">
+            <span class="api-provider-icon groq">⚡</span>
+            <div class="api-provider-info">
+              <span class="api-provider-name">Groq</span>
+              <span class="api-provider-models">Llama 3.3, Qwen 3, GPT-OSS...</span>
+            </div>
+            <span class="api-check" id="check-groq">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+          </div>
+          <div class="api-provider-body">
+            <div class="api-input-wrap">
+              <input type="password" class="api-input" id="input-groq" placeholder="gsk_..." autocomplete="off" spellcheck="false"/>
+              <button class="api-toggle-vis" data-target="input-groq" title="Mostrar/Ocultar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <button class="api-validate-btn" data-provider="groq">Validar</button>
+          </div>
+          <a class="api-link" href="https://console.groq.com/keys" target="_blank" rel="noopener">🔑 Obtener API Key →</a>
+        </div>
+
+        <!-- Gemini -->
+        <div class="api-provider-card" data-provider="gemini">
+          <div class="api-provider-head">
+            <span class="api-provider-icon gemini">✦</span>
+            <div class="api-provider-info">
+              <span class="api-provider-name">Google Gemini</span>
+              <span class="api-provider-models">2.5 Flash, 2.5 Pro, 2.0 Flash...</span>
+            </div>
+            <span class="api-check" id="check-gemini">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+          </div>
+          <div class="api-provider-body">
+            <div class="api-input-wrap">
+              <input type="password" class="api-input" id="input-gemini" placeholder="AIzaSy..." autocomplete="off" spellcheck="false"/>
+              <button class="api-toggle-vis" data-target="input-gemini" title="Mostrar/Ocultar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <button class="api-validate-btn" data-provider="gemini">Validar</button>
+          </div>
+          <a class="api-link" href="https://aistudio.google.com/api-keys?project=gen-lang-client-0086563889" target="_blank" rel="noopener">🔑 Obtener API Key →</a>
+        </div>
+
+        <!-- OpenRouter -->
+        <div class="api-provider-card" data-provider="openrouter">
+          <div class="api-provider-head">
+            <span class="api-provider-icon openrouter">🔄</span>
+            <div class="api-provider-info">
+              <span class="api-provider-name">OpenRouter</span>
+              <span class="api-provider-models">Gemma 3, GLM 4.5, Trinity Mini...</span>
+            </div>
+            <span class="api-check" id="check-openrouter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+          </div>
+          <div class="api-provider-body">
+            <div class="api-input-wrap">
+              <input type="password" class="api-input" id="input-openrouter" placeholder="sk-or-v1-..." autocomplete="off" spellcheck="false"/>
+              <button class="api-toggle-vis" data-target="input-openrouter" title="Mostrar/Ocultar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <button class="api-validate-btn" data-provider="openrouter">Validar</button>
+          </div>
+          <a class="api-link" href="https://openrouter.ai/workspaces/default/keys" target="_blank" rel="noopener">🔑 Obtener API Key →</a>
+        </div>
+      </div>
+
+      <div class="api-modal-footer">
+        <span class="api-status" id="apiStatus">Conecta al menos 1 proveedor</span>
+        <button class="api-continue-btn" id="apiContinueBtn" disabled>Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
